@@ -2,7 +2,7 @@
     <name>VIP影视</name>
     <description>VIP</description>
     <author email="958951019@qq.com" href="http://vip.app.maowu.tv">R</author>
-  <content src="index.html"/>
+  <content src="enter.html"/>
 
     <access origin="*" />
     <preference name="pageBounce" value="false"/>    <preference name="appCertificateVerify" value="false" />
