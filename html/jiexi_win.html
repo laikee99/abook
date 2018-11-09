@@ -277,10 +277,14 @@
       obj=obj.substring(index+1,obj.length);
       return obj;
     }
-function closeWin(){
-     api.closeWin({
-     });
- }
+
+      function closeWin(){
+        api.setScreenOrientation({
+            orientation: 'portrait_up'
+        });
+          api.closeWin({
+          });
+      }
  function closeWd(){
       api.closeWin({
       });
