@@ -1,7 +1,7 @@
  <widget id="A6096200649202"  version="0.0.1">
     <name>VIP影视</name>
     <description>VIP</description>
-    <author email="958951019@qq.com" href="http://www.apicloud.com">R</author>
+    <author email="958951019@qq.com" href="http://vip.app.maowu.tv">R</author>
   <content src="index.html"/>
 
     <access origin="*" />
