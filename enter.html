@@ -36,7 +36,7 @@
 <div id="wrap" class="flex-wrap flex-vertical">
     <header>
         <ul>
-            <li class="border-b active" ><img src="./image/hongbao.png" style="position: absolute;width: 1.5rem;bottom: 0.3rem;right: 0.5rem;" onclick="tohbUrl()">VIP影视</li>
+            <li class="border-b active" ><img src="./image/hongbao.png" style="position: absolute;width: 1.5rem;top: 0.3rem;right: 0.5rem;" onclick="tohbUrl()">VIP影视</li>
             <li class="border-b" >直播大厅</li>
             <li class="border-b" >福利社</li>
             <li class="border-b" >我的</li>
@@ -61,10 +61,6 @@
     var api_url = localStorage.getItem('api_url');
     var uid  =  '';
     apiready = function () {
-
-              funIniGroup();
-
-
 
         $api.fixStatusBar( $api.dom('header') );
         api.setStatusBarStyle({
@@ -95,6 +91,10 @@
                 alert('似乎没有网络！请尝试重启APP');
             }
         });
+
+        funIniGroup();
+
+
 
 
         var user_id = localStorage.getItem('user_id');
