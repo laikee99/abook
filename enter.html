@@ -40,7 +40,7 @@
     <header>
         <ul>
             <li class="border-b active" ><img src="./image/hongbao.png" style="position: absolute;width: 1.5rem;top: 0.3rem;right: 0.5rem;" onclick="tohbUrl()">VIP影视</li>
-            <li class="border-b" >影视大全</li>
+            <li class="border-b" id="maowu">影视大全</li>
             <li class="border-b" >直播大厅</li>
             <li class="border-b" >福利社</li>
             <li class="border-b" >我的</li>
@@ -52,7 +52,7 @@
     <div id="footer" class="border-t">
         <ul class="flex-wrap" >
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >首页</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >影视大全</li>
+            <li tapmode="hover" onclick="openMaowu();" class="flex-con" id="maowu">影视大全</li>
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >直播</li>
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >福利社</li>
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >我的</li>
@@ -139,9 +139,18 @@
         }
 
     }
-
+    function openMaowu(){
+        api.parseTapmode();
+      api.openWin({
+          name: 'h5',
+          url: './html/h5.html',
+          pageParam: {
+              url: 'http://m.maowu.tv/?from=app'
+          }
+      });
+    }
     function funIniGroup(){
-        var eHeaderLis = $api.domAll('header li'),
+        var eHeaderLis = $api.domAll('header li:not(#maowu)'),
             frames = [];
         for (var i = 0,len = eHeaderLis.length; i < len; i++) {
 
@@ -217,6 +226,9 @@
         }
         $api.addCls( eFootLis[index], 'active');
         $api.addCls( eHeaderLis[index], 'active');
+        if(index>0){
+          index=index-1;
+        }
         api.setFrameGroupIndex({
             name: 'group',
             index: index
