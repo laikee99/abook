@@ -87,11 +87,12 @@
     </style>
 </head>
 <body>
+  <!--
   <div>
 <img src="" id="fximg1" tapmode onclick="toBanner(topurl)" style="width:100%;">
 
  </div>
-<div class="items-box" id="jbody"></div>
+<div class="items-box" id="jbody"></div>-->
 </body>
 
 <script type="text/javascript" src="../script/api.js"></script>
@@ -99,23 +100,29 @@
 <script type="text/javascript" src="../script/auislide.js"></script>
 <script type="text/javascript" src="../script/auilazyload.js" ></script>
 <script type="text/javascript">
+  
+/*
 var topurl=localStorage.getItem('fxurl1');
-
   apiready = function(){
     api.parseTapmode();
 	document.getElementById("fximg1").src = localStorage.getItem('fxpic1');
 
-	$api.get('https://vip.app.maowu.tv/fuli/',function(rets){
+	$api.get('http://m.maowu.tv/',function(rets){
 
                 document.getElementById('jbody').innerHTML = rets;
 
         },'text');
 
   }
+  $(document).on('click','a',function(){
+          if(str.indexOf("maowu.tv") != -1){
+            toBanner($(this).attr('href'));
+          }else{
+            toBanner('http://m.maowu.tv'+$(this).attr('href'));
+          }
+                  //$(this).addClass('selected').siblings().removeClass('selected');
 
-
-
-
+          });
   //访问轮播地址
   function toBanner(url){
 
@@ -130,11 +137,6 @@ var topurl=localStorage.getItem('fxurl1');
           }
       });
     }
-  }
-
-
-
-
+  }*/
 </script>
-
 </html>
