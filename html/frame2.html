@@ -1,140 +1,162 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>VIP影视</title>
-    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/auislide.css" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
-    <style>
-        .empty{ text-align: center; padding: 120px 0; }
-		  .items-box {
-	padding: .5rem;
-	padding-bottom: 0;
-	background: #efeff4
-}
-
-.items-box .item {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	padding-bottom: .5rem;
-	height: 5rem
-}
-
-.items-box .item-left {
-	-webkit-flex-shrink: 0;
-	flex-shrink: 0;
-	padding: .75rem .5rem .75rem .5rem;
-	width: 4rem;
-	border-radius: .3rem;
-	border-right: 1px dotted #ebebeb;
-	background: #fff
-}
-
-.items-box .item-left img {
-	width: 100%;
-	border-radius: .2rem
-}
-
-.items-box .item-right {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-flex: 1;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	justify-content: space-between;
-	-webkit-box-direction: normal;
-	-webkit-box-orient: vertical;
-	-webkit-flex-direction: column;
-	flex-direction: column;
-	width: 100%;
-	padding: .75rem .5rem .75rem .5rem;
-	border-radius: .3rem;
-	background: #fff;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis
-}
-
-.items-box .item-right .item-title {
-	font-size: .7rem;
-	color: #333
-}
-
-.items-box .item-right .item-subtitle {
-	font-size: .7rem;
-	color: #ff4f2c;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis
-}
-
-.items-box .item-right .item-content {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	justify-content: space-between;
-	font-size: .6rem;
-	color: #bababa
-}
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/auislide.css" />
 </head>
 <body>
-  <div>
-<img src="" id="fximg1" tapmode onclick="toBanner(topurl)" style="width:100%;">
+  <div id="aui-slide">
+    <div id="slidebox" class="aui-slide-wrap">
+      <div class="aui-slide-node bg-dark">
+          <img src="../image/zbad1.png" />
+      </div>
 
- </div>
-<div class="items-box" id="jbody"></div>
+      <div class="aui-slide-node bg-dark">
+          <img src="../image/zbad2.png" />
+      </div>
+    </div>
+    <div class="aui-slide-page-wrap"></div>
+  </div>
+  <div class="wrap">
+    <!-- 游戏 -->
+    <div class="game-page">
+      <!-- 游戏列表 -->
+      <div class="game-list-wrap" id="gameList">
+        <ul class="clearfix" id="div_list">
+          <li>
+            <div class="game-a" onclick="tvList()">
+              <img src="../image/tvzb.png" alt="">
+              <p class="game-list-name">电视直播</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- 游戏列表 end-->
+
+    </div>
+    <!-- 游戏 end-->
+  </div>
 </body>
-
-<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/x-dot-template" id="template">
+{{~ it : value : index }}
+    <li>
+      <div class="game-a" onclick="openWin('{{= value. id }}')">
+        <img src="{{= value. img }}" alt="">
+        <p class="game-list-name">{{= value. name }}</p>
+      </div>
+    </li>
+{{~}}
+</script>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../script/doT.js"></script>
 <script type="text/javascript" src="../script/auipullrefresh.js"></script>
 <script type="text/javascript" src="../script/auislide.js"></script>
-<script type="text/javascript" src="../script/auilazyload.js" ></script>
 <script type="text/javascript">
-var topurl=localStorage.getItem('fxurl1');
-
+var slide = new auiSlide({
+    container:document.getElementById("aui-slide"),
+    // "width":300,
+    "height":160,
+    "speed":350,
+    "pageShow":true,
+    "autoPlay": 5000,
+    "pageStyle":'dot',
+    "loop":true,
+    'dotPosition':'center',
+});
+  var api_url = localStorage.getItem('api_url');
+  var i = 1;
   apiready = function(){
-    api.parseTapmode();
-	document.getElementById("fximg1").src = localStorage.getItem('fxpic1');
-  
-	$api.get('https://vip.app.maowu.tv/fuli/',function(rets){ 
+    getList();
 
-                document.getElementById('jbody').innerHTML = rets;
 
-        },'text');
 
   }
 
+  function getList(){
+    i = 1;
+    var div_list = $api.byId('div_list');
+    var template = $api.byId('template');
+    api.ajax({
+        url: 'http://vip.app.maowu.tv/api/gamezhibo.php',
+        method: 'get',
+        data: {
+            values: {
+                lx: 'hqpt',
+                ys:1
+            }
+        }
+    },function(ret, err){
+        if (ret) {
+            //alert( JSON.stringify( ret ) );
+            var pagefn = doT.template(template.text);
+            div_list.innerHTML += pagefn(ret);
+            showData();
+        } else {
+            //alert( JSON.stringify( err ) );
+        }
+    });
 
 
+  }
 
-  //访问轮播地址
-  function toBanner(url){
+  function showData(){
+    var div_list = $api.byId('div_list');
+    var template = $api.byId('template');
+    api.ajax({
+        url: 'http://vip.app.maowu.tv/api/gamezhibo.php',
+        method: 'get',
+        data: {
+            values: {
+                lx: 'hqpt',
+                ys:2
+            }
+        }
+    },function(ret, err){
+        if (ret) {
+            //alert( JSON.stringify( ret ) );
+            var pagefn = doT.template(template.text);
+            div_list.innerHTML += pagefn(ret);
+        } else {
+            //alert( JSON.stringify( err ) );
+        }
+    });
 
-    if (url == '') {
-
-    }else {
-      api.openWin({
-          name: 'h5',
-          url: './h5.html',
-          pageParam: {
-              url: url
-          }
-      });
+  }
+  function tvList(){
+    var delay = 0;
+    if(api.systemType != 'ios'){
+        delay = 300;
     }
+    api.openWin({
+        name: 'tv_list_win',
+        url: 'tv_list_win.html',
+        bounces:false,
+        delay: delay,
+        slidBackEnabled:true,
+        vScrollBarEnabled:false,
+    });
   }
 
-
-
-
+  function openWin(name){
+        var delay = 0;
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
+        api.openWin({
+            name: 'zhubo_list_win',
+            url: 'zhubo_list_win.html',
+            bounces:false,
+            delay: delay,
+            slidBackEnabled:true,
+            vScrollBarEnabled:false,
+            pageParam:{id:name}
+        });
+    }
 </script>
-
 </html>

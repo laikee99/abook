@@ -30,14 +30,14 @@
       <span id="gonggao" style="color:#585858;font-size: 0.65rem;padding-top:0.3rem;">VIP影视全新体验，会员任性看</span>
     </div>
   </div>
-  
-  
+
+
   <div class="aui-searchbar" id="search" style="background-color:#fff;">
     <div class="aui-searchbar-input aui-border-radius" >
         <i class="aui-iconfont aui-icon-search"></i>
-        
+
             <input type="text" placeholder="输入影片关键词搜索,播放速度更快" id="ff-wd">
-        
+
     </div>
     <div class="aui-btn aui-btn-info aui-btn-block" tapmode onclick="ss()" style="width:50px;height:30px;line-height:30px;margin-right:5px;">搜索</div>
 </div>
@@ -61,7 +61,7 @@
           <i class="aui-iconfont"><img src="../image/youku.jpg"/></i>
           <div class="aui-grid-label">优酷</div>
         </div>
-		
+
         <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('https://m.iqiyi.com/vip/')">
           <i class="aui-iconfont"><img src="../image/aiqiyi.jpg"/></i>
           <div class="aui-grid-label">爱奇艺</div>
@@ -87,7 +87,7 @@
           <div class="aui-grid-label">搜狐视频</div>
         </div>
 
-		
+
         <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('https://m.pptv.com/')">
           <i class="aui-iconfont"><img src="../image/pptv.png"/></i>
           <div class="aui-grid-label">PPTV</div>
@@ -97,7 +97,7 @@
           <i class="aui-iconfont"><img src="../image/letv.jpg"/></i>
           <div class="aui-grid-label">乐视视频</div>
         </div>
-		
+
         <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('https://m.miguvideo.com/wap/resource/migu/miguH5/channelTpl.jsp?nodeId=70049310')">
           <i class="aui-iconfont"><img src="../image/miguyy.jpg"/></i>
           <div class="aui-grid-label">咪咕影院</div>
@@ -143,15 +143,15 @@
 
   </section>
 
- 
+
 
   <div class="index-b">
     <img id="bpic" src="../image/ad.png" onclick="imgUrl()">
   </div>
-  
+
    <div id="content"></div>
    <div id="content1"></div>
- <!-- 
+ <!--
   <div class="list-title">
     <div class="list-title-l">
       <span style="color:#585858;font-size: 0.7rem">推荐服务</span>
@@ -204,13 +204,13 @@ var wd = ''
 
         }
     });
-	
-	$api.get('https://kan.0766city.com/autocxlist/12/1.html',function(ret){ 
+
+	$api.get('https://kan.0766city.com/autocxlist/12/1.html',function(ret){
 
                 document.getElementById('content').innerHTML = ret;
 
         },'text');
-	$api.get('https://kan.0766city.com/autocxlist/12/2.html',function(ret){ 
+	$api.get('https://kan.0766city.com/autocxlist/12/2.html',function(ret){
 
                 document.getElementById('content1').innerHTML = ret;
 
@@ -560,20 +560,20 @@ var wd = ''
   });
 
 function ss(){
-            
+
             var wd = $api.val($api.byId('ff-wd'));
 			api.openWin({
           name: 'h5',
           url: './h5.html',
           pageParam: {
-              url: 'https://kan.0766city.com/search/' + wd + '.html'
+              url: 'http://www.8h9.com.cn/search/' + wd + '.html'
             }
         });
 
 
 
 
-       
+
     }
 
 
