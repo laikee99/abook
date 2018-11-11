@@ -205,7 +205,7 @@ var wd = ''
         }
     });
 
-	$api.get('https://kan.duzhiqiang.com/autocxlist/12/1.html',function(ret){
+	$api.get(api_url+'/api/index_suggest.php',function(ret){
 
                 document.getElementById('content').innerHTML = ret;
 
