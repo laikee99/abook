@@ -1,7 +1,7 @@
- <widget id="A6096200649202"  version="0.0.1">
-    <name>VIP影视</name>
+ <widget id="A6096200649202"  version="0.0.23">
+    <name>猫屋影娱</name>
     <description>VIP</description>
-    <author email="958951019@qq.com" href="http://vip.app.maowu.tv">R</author>
+    <author email="superbcondom@gmail.com" href="http://vip.app.maowu.tv">R</author>
     <content src="enter.html"/>
 
     <access origin="*" />
