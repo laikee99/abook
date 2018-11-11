@@ -39,7 +39,7 @@
 <div id="wrap" class="flex-wrap flex-vertical">
     <header>
         <ul>
-            <li class="border-b active" ><img src="./image/hongbao.png" style="position: absolute;width: 1.5rem;top: 0.3rem;right: 0.5rem;" onclick="tohbUrl()">VIP影视</li>
+            <li class="border-b active" ><img src="./image/hongbao.png" style="position: absolute;width: 1.5rem;top: 0.3rem;right: 0.5rem;" onclick="tohbUrl()">猫屋超级VIP</li>
             <li class="border-b" id="maowu">影视大全</li>
             <li class="border-b" >直播大厅</li>
             <li class="border-b" >福利社</li>
@@ -138,6 +138,16 @@
           });
         }
 
+        api.ajax({
+            url: api_url+'/api/jx.php',
+            method: 'get'
+        },function(ret, err){
+            if (ret) {
+              //alert(ret[0].url);
+              //alert( JSON.stringify( ret ) );
+              localStorage.setItem('zbJx',ret[0].url);
+            }
+          });
     }
     function openMaowu(){
         api.parseTapmode();

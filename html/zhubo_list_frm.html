@@ -134,6 +134,16 @@
         if(api.systemType != 'ios'){
             delay = 300;
         }
+
+        api.openWin({
+            name: 'zbPlay',
+            url: './zbPlay.html',
+            pageParam: {
+                url: 'http://alhls.cdn.zhanqi.tv/zqlive/'+name+'.m3u8',
+                name: name
+            }
+        });
+        /*
         api.openWin({
             name: 'game_play_win',
             url: 'game_play_win.html',
@@ -142,7 +152,7 @@
             slidBackEnabled:true,
             vScrollBarEnabled:false,
             pageParam:{video:'http://alhls.cdn.zhanqi.tv/zqlive/'+name+'.m3u8'}
-        });
+        });*/
     }
 </script>
 </html>

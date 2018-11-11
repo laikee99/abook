@@ -16,22 +16,26 @@
         关闭
     </a>
       <div id="title" class="aui-title">猫屋影娱</div>
+      <a id="play" class="aui-btn aui-pull-right" tapmode onclick="bofangqi()">
+          切换播放器
+      </a>
   </header>
 </body>
 <script type="text/javascript" src="../script/api.js" ></script>
 <script type="text/javascript">
     apiready = function(){
-
+      localStorage.setItem('nowZb_name',api.pageParam.name);
+      url=api.pageParam.url;
+      url=url.replace('?','&');
+      url=localStorage.getItem('zbJx')+url;//alert(url);
       api.parseTapmode();
       var header = $api.byId('aui-header');
       $api.fixStatusBar(header);
       var headerPos = $api.offset(header);
       var body_h = $api.offset($api.dom('body')).h;
-
-
       var browser = api.require('webBrowser');
       browser.openView({
-          url: api.pageParam.url,
+          url: url,
           rect: {
               x: 0,
               y: headerPos.h,
@@ -56,9 +60,24 @@
                   break;
           }
       });
-
     }
 
+    function bofangqi(){
+      var delay = 0;
+      if(api.systemType != 'ios'){
+          delay = 300;
+      }
+    name=localStorage.getItem('nowZb_name');
+    api.openWin({
+            name: 'game_play_win',
+            url: 'game_play_win.html',
+            bounces:false,
+            delay: delay,
+            slidBackEnabled:true,
+            vScrollBarEnabled:false,
+            pageParam:{video:'http://alhls.cdn.zhanqi.tv/zqlive/'+name+'.m3u8'}
+        });
+    }
     function closeWin(){
       var browser = api.require('webBrowser');
       browser.historyBack(

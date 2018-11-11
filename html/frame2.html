@@ -91,6 +91,52 @@
 <img src="" id="fximg1" tapmode onclick="toBanner(topurl)" style="width:100%;">
 
  </div>
+
+ <section class="aui-grid aui-margin-b-15">
+     <div class="aui-row" id="div_list">
+<!--
+       <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('https://tv.youku.com/')">
+         <i class="aui-iconfont"><img src="../image/youku.jpg"/></i>
+         <div class="aui-grid-label">全网小说</div>
+       </div>
+
+       <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('http://vip.app.maowu.tv/api/youhuiquan.php')">
+         <i class="aui-iconfont"><img src="../image/aiqiyi.jpg"/></i>
+         <div class="aui-grid-label">超级优惠券</div>
+       </div>
+
+       <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('http://vip.app.maowu.tv/api/shengqian.php')">
+         <i class="aui-iconfont"><img src="../image/aiqiyi.jpg"/></i>
+         <div class="aui-grid-label">省钱购物</div>
+       </div>
+
+       <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('http://vip.app.maowu.tv/api/gamezixun.php')">
+         <i class="aui-iconfont"><img src="../image/aiqiyi.jpg"/></i>
+         <div class="aui-grid-label">游戏资讯</div>
+       </div>
+
+       <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('http://vip.app.maowu.tv/api/science.php')">
+         <i class="aui-iconfont"><img src="../image/aiqiyi.jpg"/></i>
+         <div class="aui-grid-label">Science</div>
+       </div>
+
+       <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('http://vip.app.maowu.tv/api/gaoxiao.php')">
+         <i class="aui-iconfont"><img src="../image/tx.png"/></i>
+         <div class="aui-grid-label">搞笑段子</div>
+       </div>
+
+       <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('http://vip.app.maowu.tv/api/news.php')">
+         <i class="aui-iconfont"><img src="../image/mgtx.jpg"/></i>
+         <div class="aui-grid-label">新闻</div>
+       </div>
+
+       <div class="aui-col-xs-3 pt-list" tapmode onclick="openLive('http://vip.app.maowu.tv/api/game.php')">
+         <i class="aui-iconfont"><img src="../image/mgtx.jpg"/></i>
+         <div class="aui-grid-label">游戏</div>
+       </div>-->
+
+     </div>
+   </section>
 <div class="items-box" id="jbody"></div>
 </body>
 
@@ -103,6 +149,7 @@ var topurl=localStorage.getItem('fxurl1');
 
   apiready = function(){
     api.parseTapmode();
+    getMenu();
 	document.getElementById("fximg1").src = localStorage.getItem('fxpic1');
 
 	$api.get('https://vip.app.maowu.tv/fuli/',function(rets){
@@ -114,6 +161,42 @@ var topurl=localStorage.getItem('fxurl1');
   }
 
 
+
+    function getMenu(){
+    //  api.showProgress();//显示加载进度框
+      i = 1;
+      var div_list = $api.byId('div_list');
+      var template = $api.byId('template');
+      api.ajax({
+          url: 'http://vip.app.maowu.tv/api/fuli_menu.php',
+          method: 'get',
+          data: {
+              values: {
+                from:'fuli_page'
+              }
+          }
+      },function(ret, err){
+      //  api.hideProgress();//隐藏加载进度框
+          if (ret) {
+html = "";
+                for(var i=0;i<ret.length;i++){
+                    //if(i == 0){
+                        var html = html+'<div class="aui-col-xs-3 pt-list" tapmode onclick="toBanner(\''+ret[i].link+'\')"><i class="aui-iconfont"><img src="'+ret[i].pic+'"/></i><div class="aui-grid-label">'+ret[i].name+'</div> </div>';
+                    //}else{
+                    //    var cl = '<li>';
+                    //}
+                  //  html += cl+'<a onclick="open_mun('+ret[i].id+')">'+ret[i].name+'</a></li>';
+                }
+              //  html +='<li class="sideline"></li>';
+                 $api.html($api.byId('div_list'),html);//在ul元素结尾插入html内容
+              //showData(); 
+          } else {
+              //alert( JSON.stringify( err ) );
+          }
+      });
+
+
+    }
 
 
   //访问轮播地址
